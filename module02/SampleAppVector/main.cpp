@@ -2,7 +2,7 @@
  * Author: Leonardo Vallejos
  * Date: 07/16/2017
  * FileName: main.cpp
- * Purpose: Use the array template to store the address book
+ * Purpose: Use the vector template to store the address book
  * Input:
  * Output:
  * Exceptions:
@@ -10,7 +10,7 @@
 
 #include <cstdlib>
 #include <iostream>
-#include <array>
+#include <vector>
 #include "Record.h"
 
 using namespace std;
@@ -34,38 +34,38 @@ void printMainMenu() {
 
 /**
  * Prints 
- * @param {array} addressBook
+ * @param {vector} addressBook
  * @param {int} index
  */
-void listContacts(array<Record*, ADDRESSBOOK_SIZE> addressBook, int index) {
-    if (index == 0) {
+void listContacts(vector<Record *> addressBook) {
+    if (addressBook.empty()) {
         throw "There are no contacts to display";
     }
     
     cout << endl << "----------------------------------------------------------------" << endl;
     cout << "ID \tNAME \t\t\tAGE \tPHONE" << endl;
     cout << "----------------------------------------------------------------" << endl;
-    for (int i=0; i<index; i++) {
+    for (int i=0; i<addressBook.size(); i++) {
         cout << addressBook[i]->getId() << "\t";
         cout << addressBook[i]->getLastName() << ", " << addressBook[i]->getFirstName() << "\t\t";
         cout << addressBook[i]->getAge() << "\t";
         cout << addressBook[i]->getPhone() << endl;
     }
     cout << "----------------------------------------------------------------" << endl;
-    cout << "Total: " << index  << " contacts" << endl;
+    cout << "Total: " << addressBook.size()  << " contacts" << endl;
 }
 
 /**
  * Adds a new contact to the address book
- * @param {array} addressBook
+ * @param {vector} addressBook
  * @param {int} index
  */
-void addContact(array<Record*, ADDRESSBOOK_SIZE> &addressBook, int &index) {
+void addContact(vector<Record *> &addressBook) {
     string fName, lName;
     int age;
     long phone;
 
-    if (index >= ADDRESSBOOK_SIZE) {
+    if (addressBook.size() >= ADDRESSBOOK_SIZE) {
         throw "Cannot add more contacts: The Address Book is full";
     }
     
@@ -82,15 +82,13 @@ void addContact(array<Record*, ADDRESSBOOK_SIZE> &addressBook, int &index) {
     cin >> phone;    
 
     try {
-        Record *newEntry = new Record(index + 1, fName, lName, age, phone);
+        Record *newEntry = new Record(addressBook.size() + 1, fName, lName, age, phone);
 
         // add the record to the address book
-        addressBook[index] = newEntry;
+        addressBook.push_back(newEntry);
     } catch (std::exception e) {
         throw "Could not add the new contact to the Address Book";
     }
-
-    index++;
 
     cout << endl << "New contact added!" << endl;
     
@@ -103,11 +101,10 @@ void addContact(array<Record*, ADDRESSBOOK_SIZE> &addressBook, int &index) {
  */
 int main(int argc, char** argv) {
     int choice;
-    int total = 0;
     bool endProgram = false;
     
     // use template array for the address book
-    array<Record*, ADDRESSBOOK_SIZE> addressBook;
+    vector<Record *> addressBook;
 
     while (!endProgram) {
         printMainMenu();
@@ -120,7 +117,7 @@ int main(int argc, char** argv) {
             case 1:
                 try {
                     // add contact
-                    addContact(addressBook, total);
+                    addContact(addressBook);
                 } catch (const char* errorMessage) {
                     cout << endl << "[error] " << errorMessage << endl;
                 }
@@ -130,7 +127,7 @@ int main(int argc, char** argv) {
             case 2:
                 try {
                     // list contacts
-                    listContacts(addressBook, total);
+                    listContacts(addressBook);
                 } catch (const char* errorMessage) {
                     cout << endl << "[error] " << errorMessage << endl;
                 }
