@@ -1,0 +1,46 @@
+/**
+ * Author: Leonardo Vallejos <leonardofabian.hernandezvallej@smail.rasmussen.edu>
+ * Date: 07/30/2017
+ * FileName: Stadium.h
+ * Purpose: FIFA 2018 World Cup App.
+ *          Course project for COP2350C Advanced C++ Programming course at Rasmussen College.
+ * Input:
+ * Output:
+ * Exceptions:
+ */
+
+#ifndef STADIUM_H
+#define STADIUM_H
+
+class Match; // forward declaration
+
+#include <string>
+#include <vector>
+#include "Match.h"
+
+using namespace std;
+
+class Stadium {
+public:
+    Stadium(int idIn, string nameIn, string locationIn, int capacityIn);
+    Stadium(const Stadium& orig);
+    virtual ~Stadium();
+
+    int getId();
+    string getName();
+    string getLocation();
+    int getCapacity();
+    void addMatch(Match *match);
+    vector<Match *> getMatches();
+    
+private:
+    int id;
+    string name;
+    string location;
+    int capacity;
+    vector<Match *> matchList;
+
+};
+
+#endif /* STADIUM_H */
+
