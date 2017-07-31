@@ -40,6 +40,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/Result.o \
 	${OBJECTDIR}/Stadium.o \
 	${OBJECTDIR}/Team.o \
+	${OBJECTDIR}/helper-functions.o \
 	${OBJECTDIR}/main.o
 
 
@@ -91,6 +92,11 @@ ${OBJECTDIR}/Team.o: Team.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Team.o Team.cpp
+
+${OBJECTDIR}/helper-functions.o: helper-functions.cpp
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/helper-functions.o helper-functions.cpp
 
 ${OBJECTDIR}/main.o: main.cpp
 	${MKDIR} -p ${OBJECTDIR}

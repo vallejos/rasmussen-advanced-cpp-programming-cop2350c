@@ -15,6 +15,12 @@
 
 using namespace std;
 
+Team::Team()
+{
+    id = 0;
+    country = "";
+}
+
 Team::Team(int idIn, string countryIn):
 id(idIn), country(countryIn)
 {

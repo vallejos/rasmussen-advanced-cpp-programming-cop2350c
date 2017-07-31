@@ -21,6 +21,7 @@ using namespace std;
 
 class Team {
 public:
+    Team();
     Team(int id, string country);
     Team(const Team& orig);
     virtual ~Team();

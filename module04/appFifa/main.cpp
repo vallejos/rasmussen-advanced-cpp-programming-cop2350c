@@ -19,6 +19,7 @@
 #include "Result.h"
 #include "Stadium.h"
 #include "Team.h"
+#include "helper-functions.h"
 
 using namespace std;
 
@@ -28,22 +29,32 @@ const int MAX_TEAMS = 32;       // how many teams
 const int MAX_MATCHES = 65;     // how many matches
 
 /**
- * Loads the list of scheduled matches
- * @param stadiumList
+ * Prints the main menu
  */
-void loadMatches(vector<Stadium *> &stadiumList) {
-    if (stadiumList.empty()) {
-        throw "There are no stadiums loaded";
-    }
-
-    // load the matches scheduled for each stadium. This process must be done in order to avoid assigning a match
-    // to an incorrect stadium
-    for (int i=0; i<stadiumList.size(); i++) {
-        Stadium* stadium = stadiumList[i];
-//        stadium->addMatch(match);
-    }
+void printMenu() {
+    cout << endl << "---------------------------" << endl;
+    cout << "\tMAIN MENU" << endl;
+    cout << "---------------------------" << endl;
+    cout << "  1 - Manage Teams" << endl;
+    cout << "  2 - Organize Groups" << endl;
+    cout << "  3 - View Schedule" << endl;
+    cout << "  4 - Enter Match Results" << endl;
+    cout << "  5 - View Positions" << endl;
+    cout << "  6 - List Stadiums" << endl;
+    cout << "---------------------------" << endl;
+    cout << "  0 - Quit" << endl;
+    cout << endl << "Select an option: ";
 }
 
+/**
+ * Prints a header for a menu option
+ * @param text
+ */
+void printHeader(string text) {
+    cout << endl << "-----------------------------------------------------------------------------------------------" << endl;
+    cout << " " << text;
+    cout << endl << "-----------------------------------------------------------------------------------------------";
+}
 
 /**
  * Loads the list of available Stadiums
@@ -110,16 +121,59 @@ void listStadiums(vector<Stadium *> &stadiumList) {
  * main function
  */
 int main(int argc, char** argv) {
+    bool exitApp = false;
+    int choice;
     vector<Stadium *> stadiumList;
+    
+    cout << endl << "Welcome to FIFA 2018 World Cup App" << endl;
 
     // load stadiums
     loadStadiums(stadiumList);
     
     // load matches
-//    loadMatches(stadiumList);
+    loadMatches(stadiumList);
     
-    // list stadiums
-    listStadiums(stadiumList);
+    while (!exitApp) {
+        printMenu();
+        cin >> choice;
+        
+        switch (choice) {
+            case 1:
+                cout << endl << "Coming soon!" << endl;
+                break;
+
+            case 2:
+                cout << endl << "Coming soon!" << endl;
+                break;
+
+            case 3:
+                cout << endl << "Coming soon!" << endl;
+                break;
+
+            case 4:
+                cout << endl << "Coming soon!" << endl;
+                break;
+
+            case 5:
+                cout << endl << "Coming soon!" << endl;
+                break;
+                
+            case 6:
+                // list stadiums (test)
+                printHeader("Loaded Stadiums");
+                listStadiums(stadiumList);
+                break;
+
+            case 0:
+                exitApp = true;
+                break;
+
+            default:
+                cout << endl << "Incorrect option. Try again." << endl;
+        }
+    } // end while
+    
+    cout << endl << "Good bye!" << endl;
     
     return 0;
 }
