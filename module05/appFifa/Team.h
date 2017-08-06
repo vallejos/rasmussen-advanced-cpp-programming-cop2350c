@@ -22,19 +22,20 @@ using namespace std;
 class Team {
 public:
     Team();
-    Team(int id, string country);
+    Team(int id, Group * group, string country);
     Team(const Team& orig);
     virtual ~Team();
     
     int getId();
     string getCountry();
-    Group *getGroup();
-    void setGroup(Group *group);
+    Group * getGroup();
+    void setGroup(Group * group);
     
 private:
     int id;
     string country;
-    Group *group;
+    Group * group;
+
 //    Position *position;
 };
 

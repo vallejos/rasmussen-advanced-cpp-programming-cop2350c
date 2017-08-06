@@ -36,14 +36,23 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/Group.o \
+	${OBJECTDIR}/GroupsList.o \
 	${OBJECTDIR}/Match.o \
 	${OBJECTDIR}/Result.o \
 	${OBJECTDIR}/Stadium.o \
 	${OBJECTDIR}/StadiumsList.o \
+	${OBJECTDIR}/Standing.o \
+	${OBJECTDIR}/StandingsList.o \
 	${OBJECTDIR}/Team.o \
 	${OBJECTDIR}/TeamsList.o \
-	${OBJECTDIR}/helper-functions.o \
-	${OBJECTDIR}/main.o
+	${OBJECTDIR}/functions.o \
+	${OBJECTDIR}/groupFunctions.o \
+	${OBJECTDIR}/helperFunctions.o \
+	${OBJECTDIR}/main.o \
+	${OBJECTDIR}/positionFunctions.o \
+	${OBJECTDIR}/resultFunctions.o \
+	${OBJECTDIR}/scheduleFunctions.o \
+	${OBJECTDIR}/teamFunctions.o
 
 
 # C Compiler Flags
@@ -75,6 +84,11 @@ ${OBJECTDIR}/Group.o: Group.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Group.o Group.cpp
 
+${OBJECTDIR}/GroupsList.o: GroupsList.cpp
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/GroupsList.o GroupsList.cpp
+
 ${OBJECTDIR}/Match.o: Match.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
@@ -95,6 +109,16 @@ ${OBJECTDIR}/StadiumsList.o: StadiumsList.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/StadiumsList.o StadiumsList.cpp
 
+${OBJECTDIR}/Standing.o: Standing.cpp
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Standing.o Standing.cpp
+
+${OBJECTDIR}/StandingsList.o: StandingsList.cpp
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/StandingsList.o StandingsList.cpp
+
 ${OBJECTDIR}/Team.o: Team.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
@@ -105,15 +129,45 @@ ${OBJECTDIR}/TeamsList.o: TeamsList.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/TeamsList.o TeamsList.cpp
 
-${OBJECTDIR}/helper-functions.o: helper-functions.cpp
+${OBJECTDIR}/functions.o: functions.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/helper-functions.o helper-functions.cpp
+	$(COMPILE.cc) -g -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/functions.o functions.cpp
+
+${OBJECTDIR}/groupFunctions.o: groupFunctions.cpp
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/groupFunctions.o groupFunctions.cpp
+
+${OBJECTDIR}/helperFunctions.o: helperFunctions.cpp
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/helperFunctions.o helperFunctions.cpp
 
 ${OBJECTDIR}/main.o: main.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main.o main.cpp
+
+${OBJECTDIR}/positionFunctions.o: positionFunctions.cpp
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/positionFunctions.o positionFunctions.cpp
+
+${OBJECTDIR}/resultFunctions.o: resultFunctions.cpp
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/resultFunctions.o resultFunctions.cpp
+
+${OBJECTDIR}/scheduleFunctions.o: scheduleFunctions.cpp
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/scheduleFunctions.o scheduleFunctions.cpp
+
+${OBJECTDIR}/teamFunctions.o: teamFunctions.cpp
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/teamFunctions.o teamFunctions.cpp
 
 # Subprojects
 .build-subprojects:

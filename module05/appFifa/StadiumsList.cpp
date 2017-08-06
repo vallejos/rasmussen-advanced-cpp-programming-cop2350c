@@ -12,6 +12,8 @@
 #include <vector>
 #include "StadiumsList.h"
 
+using namespace std;
+
 StadiumsList::StadiumsList()
 {
 }
@@ -41,12 +43,4 @@ Stadium * StadiumsList::getByIndex(int index)
     }
 
     return stadiums[index];
-}
-
-Stadium * StadiumsList::findStadiumById()
-{
-}
-
-Stadium * StadiumsList::findStadiumByName()
-{
 }

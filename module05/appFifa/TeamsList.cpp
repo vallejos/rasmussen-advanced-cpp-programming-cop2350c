@@ -12,6 +12,8 @@
 #include <vector>
 #include "TeamsList.h"
 
+using namespace std;
+
 TeamsList::TeamsList() {
 }
 
@@ -40,10 +42,22 @@ Team * TeamsList::getByIndex(int index)
     return teams[index];
 }
 
-Team * TeamsList::findTeamById()
+Team * TeamsList::getByIdAndName(int id, string name)
 {
-}
+    bool found = false;
+    int i=0;
 
-Team * TeamsList::findTeamByName()
-{
+    while (!found && i<teams.size()) {
+        if ((teams[i]->getGroup()->getName() == name) && (teams[i]->getId() == id)) {
+            found = true;
+        } else {
+            i++;
+        }
+    }
+    
+    if (found) {
+        return teams[i];
+    }
+
+    return NULL;
 }

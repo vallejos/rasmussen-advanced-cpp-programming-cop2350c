@@ -15,6 +15,8 @@
 #include <vector>
 #include "Stadium.h"
 
+using namespace std;
+
 class StadiumsList {
 public:
     StadiumsList();
@@ -24,8 +26,6 @@ public:
     void addStadium(Stadium * stadium);
     int getSize();
     Stadium * getByIndex(int index);
-    Stadium * findStadiumById();
-    Stadium * findStadiumByName();
 
 private:
     vector<Stadium *> stadiums;

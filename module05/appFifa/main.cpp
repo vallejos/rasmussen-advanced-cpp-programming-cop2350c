@@ -10,6 +10,11 @@
  * Stadium References: http://www.stadiumguide.com/tournaments/fifa-world-cup-2018/
  */
 
+// constants
+const int MAX_STADIUMS = 12;    // how many stadiums are available
+const int MAX_TEAMS = 32;       // how many teams
+const int MAX_MATCHES = 65;     // how many matches
+
 #include <cstdlib>
 #include <iostream>
 #include <iomanip>
@@ -21,79 +26,21 @@
 #include "Team.h"
 #include "StadiumsList.h"
 #include "TeamsList.h"
-#include "helper-functions.h"
+#include "GroupsList.h"
+#include "Standing.h"
+#include "StandingsList.h"
+#include "functions.h"
 
 using namespace std;
-
-// constants
-const int MAX_STADIUMS = 12;    // how many stadiums are available
-const int MAX_TEAMS = 32;       // how many teams
-const int MAX_MATCHES = 65;     // how many matches
-
-/**
- * Prints the main menu
- */
-void printMenu() {
-    cout << endl << "---------------------------" << endl;
-    cout << "\tMAIN MENU" << endl;
-    cout << "---------------------------" << endl;
-    cout << "  1 - Manage Teams" << endl;
-    cout << "  2 - Organize Groups" << endl;
-    cout << "  3 - View Schedule" << endl;
-    cout << "  4 - Enter Match Results" << endl;
-    cout << "  5 - View Positions" << endl;
-    cout << "  6 - List Stadiums" << endl;
-    cout << "---------------------------" << endl;
-    cout << "  0 - Quit" << endl;
-    cout << endl << "Select an option: ";
-}
-
-/**
- * Prints a header for a menu option
- * @param text
- */
-void printHeader(string text) {
-    cout << endl << "-----------------------------------------------------------------------------------------------" << endl;
-    cout << " " << text;
-    cout << endl << "-----------------------------------------------------------------------------------------------";
-}
-
-/**
- * Loads the list of available Stadiums
- * @param stadiums
- */
-void loadStadiums(StadiumsList* stadiums) {
-    try {
-        // add the stadiums to the address book
-        stadiums->addStadium(new Stadium(stadiums->getSize() + 1, "Luzhniki Stadium", "Moscow", 81000));
-        stadiums->addStadium(new Stadium(stadiums->getSize() + 1, "Saint Petersburg Stadium", "Saint Petersburg", 64000));
-        stadiums->addStadium(new Stadium(stadiums->getSize() + 1, "Fisht Stadium", "Sochi", 47700));
-
-        stadiums->addStadium(new Stadium(stadiums->getSize() + 1, "Ekaterinburg Arena", "Ekaterinburg", 45000));
-        stadiums->addStadium(new Stadium(stadiums->getSize() + 1, "Kazan Arena", "Kazan", 45000));
-        stadiums->addStadium(new Stadium(stadiums->getSize() + 1, "Nizhny Novgorod Stadium", "Nizhny Novgorod", 45000));
-
-        stadiums->addStadium(new Stadium(stadiums->getSize() + 1, "Rostov Arena", "Rostov-on-Don", 45000));
-        stadiums->addStadium(new Stadium(stadiums->getSize() + 1, "Samara Arena", "Samara", 45000));
-        stadiums->addStadium(new Stadium(stadiums->getSize() + 1, "Mordovia Arena", "Saransk", 45000));
-
-        stadiums->addStadium(new Stadium(stadiums->getSize() + 1, "Volgograd Stadium", "Volgograd", 45000));
-        stadiums->addStadium(new Stadium(stadiums->getSize() + 1, "Spartak Stadium", "Moscow", 42000));
-        stadiums->addStadium(new Stadium(stadiums->getSize() + 1, "Kaliningrad Stadium", "Kaliningrad", 35212));
-
-    } catch (std::exception e) {
-        throw "Could not load the Stadiums";
-    }    
-}
 
 
 /**
  * List the stadiums
  * @param stadiums
  */
-void listStadiums(StadiumsList* stadiums) {
+void listStadiums(StadiumsList * stadiums) {
     if (stadiums->getSize() == 0) {
-        throw "There are no stadiums loaded";
+        throw "There are no Stadiums loaded";
     }
 
     int matches = 0;
@@ -108,7 +55,7 @@ void listStadiums(StadiumsList* stadiums) {
 
     for (int i=0; i<stadiums->getSize(); i++) {
         try {
-            Stadium* stadium = stadiums->getByIndex(i);
+            Stadium * stadium = stadiums->getByIndex(i);
         
             cout << setw(5) << stadium->getId();
             cout << setw(35) << stadium->getName();
@@ -126,6 +73,108 @@ void listStadiums(StadiumsList* stadiums) {
     cout << "Total: " << stadiums->getSize()  << " stadiums" << ", " << matches << " matches" << endl;
 }
 
+void listGroups(GroupsList * groups) {
+    if (groups->getSize() == 0) {
+        throw "There are no Groups loaded";
+    }
+
+    int teams = 0;
+    
+    cout << endl << "-----------------------------------------------------------------------------------------------" << endl;
+    cout << setw(5) << "ID";
+    cout << setw(35) << "NAME";
+    cout << setw(25) << "TEAMS";
+    cout << endl << "-----------------------------------------------------------------------------------------------" << endl;
+
+    for (int i=0; i<groups->getSize(); i++) {
+        try {
+            Group * group = groups->getByIndex(i);
+        
+            cout << setw(5) << group->getId();
+            cout << setw(35) << group->getName();
+            cout << setw(10) << group->getTeams().size() << endl;
+
+            teams += group->getTeams().size();
+        } catch (std::exception e) {
+            throw "Could not load the Stadiums";
+        }    
+    }
+
+    cout << "-----------------------------------------------------------------------------------------------" << endl;
+    cout << "Total: " << groups->getSize()  << " groups" << ", " << teams << " teams" << endl;
+}
+
+void listTeams(TeamsList * teams) {
+    if (teams->getSize() == 0) {
+        throw "There are no Groups loaded";
+    }
+
+    cout << endl << "-----------------------------------------------------------------------------------------------" << endl;
+    cout << setw(5) << "ID";
+    cout << setw(25) << "TEAM";
+    cout << setw(25) << "GROUP";
+    cout << endl << "-----------------------------------------------------------------------------------------------" << endl;
+
+    for (int i=0; i<teams->getSize(); i++) {
+        try {
+            Team * team = teams->getByIndex(i);
+        
+            cout << setw(5) << team->getId();
+            cout << setw(25) << team->getCountry();
+            cout << setw(10) << team->getGroup()->getName() << endl;
+
+        } catch (std::exception e) {
+            throw "Could not load the Stadiums";
+        }    
+    }
+
+    cout << "-----------------------------------------------------------------------------------------------" << endl;
+    cout << "Total: " << teams->getSize()  << " teams" << endl;
+}
+
+void printStandings(StandingsList * standings) {
+    if (standings->getSize() == 0) {
+        throw "There are no Standings";
+    }
+
+    int teams = 0;
+    
+    cout << endl << "-----------------------------------------------------------------------------------------------" << endl;
+    cout << setw(5) << "POSITION";
+    cout << setw(25) << "TEAM";
+    cout << setw(8) << "PLAYED";
+    cout << setw(8) << "WON";
+    cout << setw(8) << "DRAW";
+    cout << setw(8) << "LOST";
+    cout << setw(8) << "FOR";
+    cout << setw(8) << "AGAINST";
+    cout << setw(8) << "DIFF";
+    cout << setw(8) << "POINTS";
+    cout << endl << "-----------------------------------------------------------------------------------------------" << endl;
+
+    for (int i=0; i<standings->getSize(); i++) {
+        try {
+            Standing * standing = standings->getByIndex(i);
+        
+            cout << setw(5) << standing->getId();
+            cout << setw(25) << standing->getTeam()->getCountry();
+            cout << setw(8) << standing->getPlayed();
+            cout << setw(8) << standing->getWon();
+            cout << setw(8) << standing->getDraw();
+            cout << setw(8) << standing->getLost();
+            cout << setw(8) << standing->getGoalsFor();
+            cout << setw(8) << standing->getGoalsAgainst();
+            cout << setw(8) << standing->getGoalsDiff();
+            cout << setw(8) << standing->getPoints() << endl;
+
+        } catch (std::exception e) {
+            throw "Could not load the Stadiums";
+        }    
+    }
+
+    cout << "-----------------------------------------------------------------------------------------------" << endl;
+    cout << "Total: " << standings->getSize()  << " teams" << endl;
+}
 
 /**
  * main function
@@ -133,49 +182,81 @@ void listStadiums(StadiumsList* stadiums) {
 int main(int argc, char** argv) {
     bool exitApp = false;
     int choice;
-    StadiumsList* stadiums = new StadiumsList();
-    TeamsList* teams = new TeamsList();
-    
+    StadiumsList * stadiums = new StadiumsList();
+    TeamsList * teams = new TeamsList();
+    GroupsList * groups = new GroupsList();
+    StandingsList * standings = new StandingsList(); // global standings
+
     cout << endl << "Welcome to FIFA 2018 World Cup App" << endl;
 
-    // load Teams
-//    loadTeams(teams);
-    
     // load stadiums
     loadStadiums(stadiums);
+
+    // load groups
+    loadGroups(groups);
+
+    // load teams
+    loadTeams(teams, groups);
     
+    // load standings
+    loadStandings(standings, teams);
+
     // load matches
-    loadMatches(stadiums);
-    
+//    loadMatches(stadiums, teams, groups);
+
     while (!exitApp) {
         printMenu();
         cin >> choice;
-        
+
         switch (choice) {
             case 1:
-                cout << endl << "Coming soon!" << endl;
+                handleTeamMenu();
                 break;
 
             case 2:
-                cout << endl << "Coming soon!" << endl;
+                handleGroupMenu();
                 break;
 
             case 3:
-                cout << endl << "Coming soon!" << endl;
+                handleScheduleMenu();
                 break;
 
             case 4:
-                cout << endl << "Coming soon!" << endl;
+                handleResultMenu();
                 break;
 
             case 5:
-                cout << endl << "Coming soon!" << endl;
+                handlePositionMenu();
                 break;
                 
             case 6:
                 // list stadiums (test)
                 printHeader("Loaded Stadiums");
                 listStadiums(stadiums);
+                break;
+
+            case 7:
+                // list stadiums (test)
+                printHeader("Loaded Groups");
+                listGroups(groups);
+                break;
+
+            case 8:
+                // list stadiums (test)
+                printHeader("Loaded Teams");
+                listTeams(teams);
+                break;
+
+            case 9:
+                // list stadiums (test)
+                printHeader("Loaded Matches");
+//                listStadiums(stadiums);
+                break;
+
+            case 10:
+                // list stadiums (test)
+                printHeader("Current Global Standings");
+                printStandings(standings);
                 break;
 
             case 0:

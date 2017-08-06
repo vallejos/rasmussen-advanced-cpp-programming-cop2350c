@@ -1,7 +1,7 @@
 /**
  * Author: Leonardo Vallejos <leonardofabian.hernandezvallej@smail.rasmussen.edu>
  * Date: 07/30/2017
- * FileName: helper-functions.h
+ * FileName: helperFunctions.h
  * Purpose: FIFA 2018 World Cup App.
  *          Course project for COP2350C Advanced C++ Programming course at Rasmussen College.
  * Input:
@@ -14,9 +14,14 @@
 
 #include "StadiumsList.h"
 #include "TeamsList.h"
+#include "GroupsList.h"
+#include "StandingsList.h"
 
-void loadTeams(TeamsList* teams);
-void loadMatches(StadiumsList* stadiums);
+void loadStadiums(StadiumsList * stadiums);
+void loadGroups(GroupsList * groups);
+void loadTeams(TeamsList * teams, GroupsList * groups);
+void loadStandings(StandingsList * standings, TeamsList * teams);
+void loadMatches(StadiumsList * stadiums, TeamsList * teams, GroupsList * groups);
 
 #endif /* HELPER_FUNCTIONS_H */
 

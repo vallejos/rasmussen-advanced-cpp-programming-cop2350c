@@ -13,7 +13,10 @@
 #define TEAMSLIST_H
 
 #include <vector>
+#include <string>
 #include "Team.h"
+
+using namespace std;
 
 class TeamsList {
 public:
@@ -24,8 +27,7 @@ public:
     void addTeam(Team *team);
     int getSize();
     Team * getByIndex(int index);
-    Team * findTeamById();
-    Team * findTeamByName();
+    Team * getByIdAndName(int id, string name);
 
 private:
     vector<Team *> teams;

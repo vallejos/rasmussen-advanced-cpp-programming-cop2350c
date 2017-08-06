@@ -46,3 +46,17 @@ vector<Team *> Group::getTeams()
 {
     return teams;
 }
+
+Team * Group::getTeamByPosition(int position)
+{
+    if (position < 1 || position > standings->getSize()) {
+        throw "Invalid position";
+    }
+    
+    return standings->getByIndex(position - 1)->getTeam();
+}
+
+StandingsList * Group::getStandings()
+{
+    return standings;
+}

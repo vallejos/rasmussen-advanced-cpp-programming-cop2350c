@@ -19,10 +19,11 @@ Team::Team()
 {
     id = 0;
     country = "";
+    group = NULL;
 }
 
-Team::Team(int idIn, string countryIn):
-id(idIn), country(countryIn)
+Team::Team(int idIn, Group * groupIn, string countryIn):
+id(idIn), group(groupIn), country(countryIn)
 {
 }
 
@@ -42,12 +43,12 @@ string Team::getCountry()
     return country;
 }
 
-Group *Team::getGroup()
+Group * Team::getGroup()
 {
     return group;
 }
 
-void Team::setGroup(Group *groupIn)
+void Team::setGroup(Group * groupIn)
 {
     group = groupIn;
 }

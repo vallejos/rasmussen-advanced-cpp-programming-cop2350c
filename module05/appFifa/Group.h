@@ -17,6 +17,7 @@ class Team; // forward declaration
 #include <string>
 #include <vector>
 #include "Team.h"
+#include "StandingsList.h"
 
 using namespace std;
 
@@ -30,12 +31,15 @@ public:
     string getName();
     void addTeam(Team *team);
     vector<Team *> getTeams();
+    Team * getTeamByPosition(int position);
+    StandingsList * getStandings();
 
 private:
     int id;
     string name;
     vector<Team *> teams;
-    
+    StandingsList * standings; // group standings
+
 };
 
 #endif /* GROUP_H */
