@@ -38,6 +38,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/Group.o \
 	${OBJECTDIR}/GroupsList.o \
 	${OBJECTDIR}/Match.o \
+	${OBJECTDIR}/MatchesList.o \
 	${OBJECTDIR}/Result.o \
 	${OBJECTDIR}/Stadium.o \
 	${OBJECTDIR}/StadiumsList.o \
@@ -93,6 +94,11 @@ ${OBJECTDIR}/Match.o: Match.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Match.o Match.cpp
+
+${OBJECTDIR}/MatchesList.o: MatchesList.cpp
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/MatchesList.o MatchesList.cpp
 
 ${OBJECTDIR}/Result.o: Result.cpp
 	${MKDIR} -p ${OBJECTDIR}

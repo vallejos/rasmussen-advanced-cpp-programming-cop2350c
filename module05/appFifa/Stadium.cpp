@@ -13,13 +13,14 @@
 #include <vector>
 #include "Match.h"
 #include "Stadium.h"
+#include "MatchesList.h"
 
 using namespace std;
 
 Stadium::Stadium(int idIn, string nameIn, string locationIn, int capacityIn):
 id(idIn), name(nameIn), location(locationIn), capacity(capacityIn)
 {
-//    matchList = null;
+    matches = new MatchesList();
 }
 
 Stadium::Stadium(const Stadium& orig) {
@@ -48,12 +49,12 @@ int Stadium::getCapacity()
     return capacity;
 }
 
-void Stadium::addMatch(Match *match)
+void Stadium::addMatch(Match * match)
 {
-    matchList.push_back(match);
+    matches->addMatch(match);
 }
 
-vector<Match *> Stadium::getMatches()
+MatchesList * Stadium::getMatches()
 {
-    return matchList;
+    return matches;
 }

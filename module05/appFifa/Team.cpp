@@ -17,13 +17,13 @@ using namespace std;
 
 Team::Team()
 {
-    id = 0;
+    name = "0";
     country = "";
     group = NULL;
 }
 
-Team::Team(int idIn, Group * groupIn, string countryIn):
-id(idIn), group(groupIn), country(countryIn)
+Team::Team(string nameIn, Group * groupIn, string countryIn):
+name(nameIn), group(groupIn), country(countryIn)
 {
 }
 
@@ -33,14 +33,18 @@ Team::Team(const Team& orig) {
 Team::~Team() {
 }
 
-int Team::getId()
+string Team::getName()
 {
-    return id;
+    return name;
 }
 
 string Team::getCountry()
 {
     return country;
+}
+
+void Team::setCountry(string countryIn) {
+    country = countryIn;
 }
 
 Group * Team::getGroup()

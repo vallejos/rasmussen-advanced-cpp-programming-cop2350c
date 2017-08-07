@@ -13,31 +13,35 @@
 #define GROUP_H
 
 class Team; // forward declaration
+class TeamsList; // forward declaration
 
 #include <string>
 #include <vector>
-#include "Team.h"
+#include "Standing.h"
 #include "StandingsList.h"
+#include "Team.h"
+#include "TeamsList.h"
 
 using namespace std;
 
 class Group {
 public:
-    Group(int idIn, string nameIn);
+    Group(string nameIn);
     Group(const Group& orig);
     virtual ~Group();
 
-    int getId();
     string getName();
     void addTeam(Team *team);
-    vector<Team *> getTeams();
+    TeamsList * getTeams();
     Team * getTeamByPosition(int position);
     StandingsList * getStandings();
+    void addStanding(Standing * standing);
+    void setTeams(TeamsList * teamsIn);
+    void setStandings(StandingsList * standingsIn);
 
 private:
-    int id;
     string name;
-    vector<Team *> teams;
+    TeamsList * teams;
     StandingsList * standings; // group standings
 
 };

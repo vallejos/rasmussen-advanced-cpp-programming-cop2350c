@@ -23,24 +23,27 @@ using namespace std;
 
 class Match {
 public:
-    Match(int idIn, string dateIn, Stadium *stadiumIn, Team *team1In, Team *team2In);
+    Match(int idIn, string dateIn, Stadium * stadiumIn, Team * team1In, Team * team2In);
     Match(const Match& orig);
     virtual ~Match();
     
     int getId();
     string getDate();
-    Stadium *getStadium();
-    Team *getTeam1();
-    Team *getTeam2();
-    Result *getResult();
+    Stadium * getStadium();
+    Team * getTeam1();
+    Team * getTeam2();
+    Result * getResult();
 
+    Team * getWinner();
+    Team * getLoser();
+    
 private:
     int id;
     string date;
-    Stadium *stadium;
-    Team *team1;
-    Team *team2;
-    Result *result;
+    Stadium * stadium;
+    Team * team1;
+    Team * team2;
+    Result * result;
 
 };
 

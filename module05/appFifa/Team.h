@@ -22,21 +22,21 @@ using namespace std;
 class Team {
 public:
     Team();
-    Team(int id, Group * group, string country);
+    Team(string nameIn, Group * group, string countryIn);
     Team(const Team& orig);
     virtual ~Team();
     
-    int getId();
+    string getName();
     string getCountry();
+    void setCountry(string countryIn);
     Group * getGroup();
     void setGroup(Group * group);
     
 private:
-    int id;
-    string country;
-    Group * group;
+    string name;        // e.g. A1
+    string country;     // e.g. Russia
+    Group * group;      // e.g. A
 
-//    Position *position;
 };
 
 #endif /* TEAM_H */

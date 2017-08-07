@@ -35,20 +35,40 @@ int TeamsList::getSize()
 
 Team * TeamsList::getByIndex(int index)
 {
-    if (index > teams.size() - 1) {
-        throw "Invalid index";
+    if (index < 0 || index > teams.size() - 1) {
+        throw "TeamsList: Invalid index";
     }
 
     return teams[index];
 }
 
-Team * TeamsList::getByIdAndName(int id, string name)
+//Team * TeamsList::getByIdAndName(int id, string name)
+//{
+//    bool found = false;
+//    int i=0;
+//
+//    while (!found && i<teams.size()) {
+//        if ((teams[i]->getGroup()->getName() == name) && (teams[i]->getId() == id)) {
+//            found = true;
+//        } else {
+//            i++;
+//        }
+//    }
+//    
+//    if (found) {
+//        return teams[i];
+//    }
+//
+//    return NULL;
+//}
+
+Team * TeamsList::getByName(string name)
 {
     bool found = false;
     int i=0;
 
     while (!found && i<teams.size()) {
-        if ((teams[i]->getGroup()->getName() == name) && (teams[i]->getId() == id)) {
+        if ((teams[i]->getName() == name)) {
             found = true;
         } else {
             i++;
@@ -61,3 +81,25 @@ Team * TeamsList::getByIdAndName(int id, string name)
 
     return NULL;
 }
+
+//Team * TeamsList::getByGroupPosition(int id, string group)
+//{
+//    bool found = false;
+//    int i=0;
+//
+//    while (!found && i<teams.size()) {
+//        if ((teams[i]->getGroup()->getName() == group) && (teams[i]->getGroup()-> == id)) {
+//            found = true;
+//        } else {
+//            i++;
+//        }
+//    }
+//    
+//    if (found) {
+//        return teams[i];
+//    }
+//
+//    return NULL;
+//}
+//    
+    

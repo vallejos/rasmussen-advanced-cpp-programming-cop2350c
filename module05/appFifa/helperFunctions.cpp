@@ -11,6 +11,7 @@
 
 #include <string>
 #include <vector>
+#include <iostream>
 #include "helperFunctions.h"
 #include "Match.h"
 #include "Team.h"
@@ -21,9 +22,11 @@
 #include "TeamsList.h"
 #include "GroupsList.h"
 #include "StandingsList.h"
+#include "MatchesList.h"
 
 
 using namespace std;
+
 
 /**
  * Loads the list of available Stadiums
@@ -53,81 +56,128 @@ void loadStadiums(StadiumsList * stadiums) {
     }    
 }
 
+
 /**
  * Loads the list of groups
  * @param groups
  */
 void loadGroups(GroupsList * groups) {
-    groups->addGroup(new Group(groups->getSize() + 1, "A"));
-    groups->addGroup(new Group(groups->getSize() + 1, "B"));
-    groups->addGroup(new Group(groups->getSize() + 1, "C"));
-    groups->addGroup(new Group(groups->getSize() + 1, "D"));
-    groups->addGroup(new Group(groups->getSize() + 1, "E"));
-    groups->addGroup(new Group(groups->getSize() + 1, "F"));
-    groups->addGroup(new Group(groups->getSize() + 1, "G"));
-    groups->addGroup(new Group(groups->getSize() + 1, "H"));
+    groups->addGroup(new Group("A"));
+    groups->addGroup(new Group("B"));
+    groups->addGroup(new Group("C"));
+    groups->addGroup(new Group("D"));
+    groups->addGroup(new Group("E"));
+    groups->addGroup(new Group("F"));
+    groups->addGroup(new Group("G"));
+    groups->addGroup(new Group("H"));
 }
 
+
 /**
- * Loads the list of teams
+ * Loads the list of teams and assigns the teams to each group
  * @param teams
  */
 void loadTeams(TeamsList* teams, GroupsList * groups) {
+    Group * group;
+    
     // group A
-    teams->addTeam(new Team(teams->getSize() + 1, groups->getByName("A"), "Russia"));
-    teams->addTeam(new Team(teams->getSize() + 1, groups->getByName("A"), ""));
-    teams->addTeam(new Team(teams->getSize() + 1, groups->getByName("A"), ""));
-    teams->addTeam(new Team(teams->getSize() + 1, groups->getByName("A"), ""));    
+    group = groups->getByName("A");
+    teams->addTeam(new Team("A1", group, "Russia"));
+    teams->addTeam(new Team("A2", group, "Team A2"));
+    teams->addTeam(new Team("A3", group, "Team A3"));
+    teams->addTeam(new Team("A4", group, "Team A4"));
+
+    // assign teams to group
+    for (int i=0; i<4; i++) {
+        group->addTeam(teams->getByIndex(i));
+    }
 
     // group B
-    teams->addTeam(new Team(teams->getSize() + 1, groups->getByName("B"), ""));
-    teams->addTeam(new Team(teams->getSize() + 1, groups->getByName("B"), ""));
-    teams->addTeam(new Team(teams->getSize() + 1, groups->getByName("B"), ""));
-    teams->addTeam(new Team(teams->getSize() + 1, groups->getByName("B"), ""));
+    group = groups->getByName("B");
+    teams->addTeam(new Team("B1", groups->getByName("B"), "Team B1"));
+    teams->addTeam(new Team("B2", groups->getByName("B"), "Team B2"));
+    teams->addTeam(new Team("B3", groups->getByName("B"), "Team B3"));
+    teams->addTeam(new Team("B4", groups->getByName("B"), "Team B4"));
+
+    // assign teams to group
+    for (int i=4; i<8; i++) {
+        groups->getByName("B")->addTeam(teams->getByIndex(i));
+    }
 
     // group C
-    teams->addTeam(new Team(teams->getSize() + 1, groups->getByName("C"), ""));
-    teams->addTeam(new Team(teams->getSize() + 1, groups->getByName("C"), ""));
-    teams->addTeam(new Team(teams->getSize() + 1, groups->getByName("C"), ""));
-    teams->addTeam(new Team(teams->getSize() + 1, groups->getByName("C"), ""));
-    
+    teams->addTeam(new Team("C1", groups->getByName("C"), "Team C1"));
+    teams->addTeam(new Team("C2", groups->getByName("C"), "Team C2"));
+    teams->addTeam(new Team("C3", groups->getByName("C"), "Team C3"));
+    teams->addTeam(new Team("C4", groups->getByName("C"), "Team C4"));
+
+    // assign teams to group
+    for (int i=8; i<12; i++) {
+        groups->getByName("C")->addTeam(teams->getByIndex(i));
+    }
+
     // group D
-    teams->addTeam(new Team(teams->getSize() + 1, groups->getByName("D"), ""));
-    teams->addTeam(new Team(teams->getSize() + 1, groups->getByName("D"), ""));
-    teams->addTeam(new Team(teams->getSize() + 1, groups->getByName("D"), ""));
-    teams->addTeam(new Team(teams->getSize() + 1, groups->getByName("D"), ""));
+    teams->addTeam(new Team("D1", groups->getByName("D"), "Team D1"));
+    teams->addTeam(new Team("D2", groups->getByName("D"), "Team D2"));
+    teams->addTeam(new Team("D3", groups->getByName("D"), "Team D3"));
+    teams->addTeam(new Team("D4", groups->getByName("D"), "Team D4"));
+
+    // assign teams to group
+    for (int i=12; i<16; i++) {
+        groups->getByName("D")->addTeam(teams->getByIndex(i));
+    }
 
     // group E
-    teams->addTeam(new Team(teams->getSize() + 1, groups->getByName("E"), ""));
-    teams->addTeam(new Team(teams->getSize() + 1, groups->getByName("E"), ""));
-    teams->addTeam(new Team(teams->getSize() + 1, groups->getByName("E"), ""));
-    teams->addTeam(new Team(teams->getSize() + 1, groups->getByName("E"), ""));
+    teams->addTeam(new Team("E1", groups->getByName("E"), "Team E1"));
+    teams->addTeam(new Team("E2", groups->getByName("E"), "Team E2"));
+    teams->addTeam(new Team("E3", groups->getByName("E"), "Team E3"));
+    teams->addTeam(new Team("E4", groups->getByName("E"), "Team E4"));
+
+    // assign teams to group
+    for (int i=16; i<20; i++) {
+        groups->getByName("E")->addTeam(teams->getByIndex(i));
+    }
 
     // group F
-    teams->addTeam(new Team(teams->getSize() + 1, groups->getByName("F"), ""));
-    teams->addTeam(new Team(teams->getSize() + 1, groups->getByName("F"), ""));
-    teams->addTeam(new Team(teams->getSize() + 1, groups->getByName("F"), ""));
-    teams->addTeam(new Team(teams->getSize() + 1, groups->getByName("F"), ""));
+    teams->addTeam(new Team("F1", groups->getByName("F"), "Team F1"));
+    teams->addTeam(new Team("F2", groups->getByName("F"), "Team F2"));
+    teams->addTeam(new Team("F3", groups->getByName("F"), "Team F3"));
+    teams->addTeam(new Team("F4", groups->getByName("F"), "Team F4"));
+
+    // assign teams to group
+    for (int i=20; i<24; i++) {
+        groups->getByName("F")->addTeam(teams->getByIndex(i));
+    }
 
     // group G
-    teams->addTeam(new Team(teams->getSize() + 1, groups->getByName("G"), ""));
-    teams->addTeam(new Team(teams->getSize() + 1, groups->getByName("G"), ""));
-    teams->addTeam(new Team(teams->getSize() + 1, groups->getByName("G"), ""));
-    teams->addTeam(new Team(teams->getSize() + 1, groups->getByName("G"), ""));
+    teams->addTeam(new Team("G1", groups->getByName("G"), "Team G1"));
+    teams->addTeam(new Team("G2", groups->getByName("G"), "Team G2"));
+    teams->addTeam(new Team("G3", groups->getByName("G"), "Team G3"));
+    teams->addTeam(new Team("G4", groups->getByName("G"), "Team G4"));
+
+    // assign teams to group
+    for (int i=24; i<28; i++) {
+        groups->getByName("G")->addTeam(teams->getByIndex(i));
+    }
 
     // group H
-    teams->addTeam(new Team(teams->getSize() + 1, groups->getByName("H"), ""));
-    teams->addTeam(new Team(teams->getSize() + 1, groups->getByName("H"), ""));
-    teams->addTeam(new Team(teams->getSize() + 1, groups->getByName("H"), ""));
-    teams->addTeam(new Team(teams->getSize() + 1, groups->getByName("H"), ""));
+    teams->addTeam(new Team("H1", groups->getByName("H"), "Team H1"));
+    teams->addTeam(new Team("H2", groups->getByName("H"), "Team H2"));
+    teams->addTeam(new Team("H3", groups->getByName("H"), "Team H3"));
+    teams->addTeam(new Team("H4", groups->getByName("H"), "Team H4"));
+
+    // assign teams to group
+    for (int i=28; i<32; i++) {
+        groups->getByName("H")->addTeam(teams->getByIndex(i));
+    }
+    
 }
+
 
 /**
  * Initialize global standings
  * @param stadiums
  */
-void loadStandings(StandingsList * standings, TeamsList * teams)
-{
+void loadStandings(StandingsList * standings, TeamsList * teams) {
     if (teams->getSize() == 0) {
         throw "Team list is empty";
     }
@@ -139,10 +189,112 @@ void loadStandings(StandingsList * standings, TeamsList * teams)
 
 
 /**
- * Loads the list of scheduled matches
+ * Initialize standings for every group
+ * @param groups
+ */
+void loadGroupStandings(GroupsList * groups, StandingsList * standings) {
+    if (groups->getSize() == 0) {
+        throw "Groups list is empty";
+    }
+
+    if (standings->getSize() == 0) {
+        throw "Global Standings not loaded";
+    }
+    
+    Group * group;
+    
+    group = groups->getByName("A");
+    StandingsList * gs1 = new StandingsList();
+    for (int i=0; i<4; i++) {
+        Team * t = group->getTeams()->getByIndex(i);
+        Standing * s = standings->getByTeamName(t->getName());
+        gs1->addStanding(s);        
+    }
+    group->setStandings(gs1);
+
+    group = groups->getByName("B");
+    StandingsList * gs2 = new StandingsList();
+    for (int i=0; i<4; i++) {
+        Team * t = group->getTeams()->getByIndex(i);
+        Standing * s = standings->getByTeamName(t->getName());
+        gs2->addStanding(s);        
+    }
+    group->setStandings(gs2);
+    
+    group = groups->getByName("C");
+    StandingsList * gs3 = new StandingsList();
+    for (int i=0; i<4; i++) {
+        Team * t = group->getTeams()->getByIndex(i);
+        Standing * s = standings->getByTeamName(t->getName());
+        gs3->addStanding(s);        
+    }
+    group->setStandings(gs3);
+
+    group = groups->getByName("D");
+    StandingsList * gs4 = new StandingsList();
+    for (int i=0; i<4; i++) {
+        Team * t = group->getTeams()->getByIndex(i);
+        Standing * s = standings->getByTeamName(t->getName());
+        gs4->addStanding(s);        
+    }
+    group->setStandings(gs4);
+
+    group = groups->getByName("E");
+    StandingsList * gs5 = new StandingsList();
+    for (int i=0; i<4; i++) {
+        Team * t = group->getTeams()->getByIndex(i);
+        Standing * s = standings->getByTeamName(t->getName());
+        gs5->addStanding(s);        
+    }
+    group->setStandings(gs5);
+
+    group = groups->getByName("F");
+    StandingsList * gs6 = new StandingsList();
+    for (int i=0; i<4; i++) {
+        Team * t = group->getTeams()->getByIndex(i);
+        Standing * s = standings->getByTeamName(t->getName());
+        gs6->addStanding(s);        
+    }
+    group->setStandings(gs6);
+
+    group = groups->getByName("G");
+    StandingsList * gs7 = new StandingsList();
+    for (int i=0; i<4; i++) {
+        Team * t = group->getTeams()->getByIndex(i);
+        Standing * s = standings->getByTeamName(t->getName());
+        gs7->addStanding(s);        
+    }
+    group->setStandings(gs7);
+
+    group = groups->getByName("H");
+    StandingsList * gs8 = new StandingsList();
+    for (int i=0; i<4; i++) {
+        Team * t = group->getTeams()->getByIndex(i);
+        Standing * s = standings->getByTeamName(t->getName());
+        gs8->addStanding(s);        
+    }
+    group->setStandings(gs8);
+
+}
+
+
+/**
+ * Adds a match to the matches list and to a stadium
+ * @param match
+ * @param matches
+ * @param stadium
+ */
+void addMatch(Match * match, MatchesList * matches, Stadium * stadium) {
+    matches->addMatch(match);
+    stadium->addMatch(match);
+}
+
+
+/**
+ * Loads the list of scheduled matches and adds the relationships between the different data structures
  * @param stadiums
  */
-void loadMatches(StadiumsList * stadiums, TeamsList * teams, GroupsList * groups) {
+void loadMatches(MatchesList * matches, StadiumsList * stadiums, TeamsList * teams, GroupsList * groups) {
     if (stadiums->getSize() == 0) {
         throw "There are no Stadiums loaded";
     }
@@ -154,564 +306,451 @@ void loadMatches(StadiumsList * stadiums, TeamsList * teams, GroupsList * groups
     if (groups->getSize() == 0) {
         throw "There are no Groups loaded";
     }
-
-    // load the matches scheduled for each stadium. This process must be done in order to avoid assigning a match
-    // to an incorrect stadium
+    
+    // load the matches scheduled for each stadium. This process must be done 
+    // to avoid assigning a match to an incorrect stadium
 
     ////////////////////////////////////////////////
     // STADIUM 1
     ////////////////////////////////////////////////
-    stadiums->getByIndex(0)->addMatch(new Match(
-            stadiums->getByIndex(0)->getMatches().size() + 1,
+    addMatch(new Match(
+            matches->getSize() + 1,
             "14 Jun 2018 18:00",
             stadiums->getByIndex(0),
-            teams->getByIdAndName(1, "A"), // A1 Russia
-            teams->getByIdAndName(2, "A") // A2
-    ));
+            teams->getByName("A1"), // A1 Russia
+            teams->getByName("A2") // A2
+    ), matches, stadiums->getByIndex(0));
 
-    stadiums->getByIndex(0)->addMatch(new Match(
-            stadiums->getByIndex(0)->getMatches().size() + 1,
+    addMatch(new Match(
+            matches->getSize() + 1,
             "17 Jun 2018 18:00",
             stadiums->getByIndex(0),
-            teams->getByIdAndName(1, "F"), // F1
-            teams->getByIdAndName(2, "F")  // F2   
-    ));
+            teams->getByName("F1"), // F1
+            teams->getByName("F2")  // F2   
+    ), matches, stadiums->getByIndex(0));
 
-    stadiums->getByIndex(0)->addMatch(new Match(
-            stadiums->getByIndex(0)->getMatches().size() + 1,
+    addMatch(new Match(
+            matches->getSize() + 1,
             "20 Jun 2018 15:00",
             stadiums->getByIndex(0),
-            teams->getByIdAndName(1, "B"), // B1
-            teams->getByIdAndName(3, "B")  // B3   
-    ));
+            teams->getByName("B1"), // B1
+            teams->getByName("B3")  // B3   
+    ), matches, stadiums->getByIndex(0));
 
-    stadiums->getByIndex(0)->addMatch(new Match(
-            stadiums->getByIndex(0)->getMatches().size() + 1,
+    addMatch(new Match(
+            matches->getSize() + 1,
             "26 Jun 2018 17:00",
             stadiums->getByIndex(0),
-            teams->getByIdAndName(4, "C"), // C4
-            teams->getByIdAndName(1, "C")  // C1   
-    ));
-
-    stadiums->getByIndex(0)->addMatch(new Match(
-            stadiums->getByIndex(0)->getMatches().size() + 1,
-            "1 Jul 2018 17:00",
-            stadiums->getByIndex(0),
-            groups->getTeamByGroupPosition(1, "B"), // 1B
-            groups->getTeamByGroupPosition(2, "A")  // 2A   
-    ));
-
-    // semifinal
-    stadiums->getByIndex(0)->addMatch(new Match(
-            stadiums->getByIndex(0)->getMatches().size() + 1,
-            "11 Jul 2018 21:00",
-            stadiums->getByIndex(0),
-            teams->getByIdAndName(59, "W"), // W59
-            teams->getByIdAndName(60, "W")  // W60  
-    ));
-
-    // final
-    stadiums->getByIndex(0)->addMatch(new Match(
-            stadiums->getByIndex(0)->getMatches().size() + 1,
-            "15 Jul 2018 18:00",
-            stadiums->getByIndex(0),
-            teams->getByIdAndName(61, "W"), // W61
-            teams->getByIdAndName(62, "W")  // W62  
-    ));
-
+            teams->getByName("C4"), // C4
+            teams->getByName("C1")  // C1   
+    ), matches, stadiums->getByIndex(0));
+    
+    
+    
     ////////////////////////////////////////////////
     // STADIUM 2
     ////////////////////////////////////////////////
-    stadiums->getByIndex(1)->addMatch(new Match(
-            stadiums->getByIndex(1)->getMatches().size() + 1,
+    addMatch(new Match(
+            matches->getSize() + 1,
             "15 Jun 2018 17:00",
             stadiums->getByIndex(1),
-            teams->getByIdAndName(3, "B"), // B3
-            teams->getByIdAndName(4, "B")  // B4
-    ));
+            teams->getByName("B3"), // B3
+            teams->getByName("B4")  // B4
+    ), matches, stadiums->getByIndex(1));
 
-    stadiums->getByIndex(1)->addMatch(new Match(
-            stadiums->getByIndex(1)->getMatches().size() + 1,
+    addMatch(new Match(
+            matches->getSize() + 1,
             "19 Jun 2018 15:00",
             stadiums->getByIndex(1),
-            teams->getByIdAndName(1, "A"), // Russia
-            teams->getByIdAndName(3, "A")  // A3  
-    ));
+            teams->getByName("A1"), // Russia
+            teams->getByName("A3")  // A3  
+    ), matches, stadiums->getByIndex(1));
 
-    stadiums->getByIndex(1)->addMatch(new Match(
-            stadiums->getByIndex(1)->getMatches().size() + 1,
+    addMatch(new Match(
+            matches->getSize() + 1,
             "22 Jun 2018 21:00",
             stadiums->getByIndex(1),
-            teams->getByIdAndName(1, "E"), // E1
-            teams->getByIdAndName(3, "E")  // E3  
-    ));
+            teams->getByName("E1"), // E1
+            teams->getByName("E3")  // E3  
+    ), matches, stadiums->getByIndex(1));
 
-    stadiums->getByIndex(1)->addMatch(new Match(
-            stadiums->getByIndex(1)->getMatches().size() + 1,
+    addMatch(new Match(
+            matches->getSize() + 1,
             "26 Jun 2018 17:00",
             stadiums->getByIndex(1),
-            teams->getByIdAndName(4, "D"), // D4
-            teams->getByIdAndName(1, "D")  // D1
-    ));
+            teams->getByName("D4"), // D4
+            teams->getByName("D1")  // D1
+    ), matches, stadiums->getByIndex(1));
 
-    stadiums->getByIndex(1)->addMatch(new Match(
-            stadiums->getByIndex(1)->getMatches().size() + 1,
-            "3 Jul 2018 17:00",
-            stadiums->getByIndex(1),
-            groups->getTeamByGroupPosition(1, "F"), // 1F
-            groups->getTeamByGroupPosition(2, "E")  // 2E  
-    ));
 
-    // semi final
-    stadiums->getByIndex(1)->addMatch(new Match(
-            stadiums->getByIndex(1)->getMatches().size() + 1,
-            "10 Jul 2018 21:00",
-            stadiums->getByIndex(1),
-            teams->getByIdAndName(57, "W"), // W57
-            teams->getByIdAndName(58, "W")  // W58  
-    ));
-
-    // third place
-    stadiums->getByIndex(1)->addMatch(new Match(
-            stadiums->getByIndex(1)->getMatches().size() + 1,
-            "14 Jul 2018 17:00",
-            stadiums->getByIndex(1),
-            teams->getByIdAndName(61, "L"), // L61
-            teams->getByIdAndName(62, "L")  // L62  
-    ));
-
+    
     ////////////////////////////////////////////////
     // STADIUM 3
     ////////////////////////////////////////////////
-    stadiums->getByIndex(2)->addMatch(new Match(
-            stadiums->getByIndex(2)->getMatches().size() + 1,
+    addMatch(new Match(
+            matches->getSize() + 1,
             "15 Jun 2018 21:00",
             stadiums->getByIndex(2),
-            teams->getByIdAndName(1, "B"), // B1
-            teams->getByIdAndName(2, "B")  // B2
-    ));
+            teams->getByName("B1"), // B1
+            teams->getByName("B2")  // B2
+    ), matches, stadiums->getByIndex(2));
 
-    stadiums->getByIndex(2)->addMatch(new Match(
-            stadiums->getByIndex(2)->getMatches().size() + 1,
+    addMatch(new Match(
+            matches->getSize() + 1,
             "18 Jun 2018 18:00",
             stadiums->getByIndex(2),
-            teams->getByIdAndName(1, "G"), // G1
-            teams->getByIdAndName(2, "G")  // G2
-    ));
+            teams->getByName("G1"), // G1
+            teams->getByName("G2")  // G2
+    ), matches, stadiums->getByIndex(2));
 
-    stadiums->getByIndex(2)->addMatch(new Match(
-            stadiums->getByIndex(2)->getMatches().size() + 1,
+    addMatch(new Match(
+            matches->getSize() + 1,
             "23 Jun 2018 18:00",
             stadiums->getByIndex(2),
-            teams->getByIdAndName(1, "F"), // F1
-            teams->getByIdAndName(13, "F")  // F3
-    ));
+            teams->getByName("F1"), // F1
+            teams->getByName("F3")  // F3
+    ), matches, stadiums->getByIndex(2));
 
-    stadiums->getByIndex(2)->addMatch(new Match(
-            stadiums->getByIndex(2)->getMatches().size() + 1,
+    addMatch(new Match(
+            matches->getSize() + 1,
             "26 Jun 2018 17:00",
             stadiums->getByIndex(2),
-            teams->getByIdAndName(2, "C"), // C2
-            teams->getByIdAndName(3, "C")  // C3
-    ));
+            teams->getByName("C2"), // C2
+            teams->getByName("C3")  // C3
+    ), matches, stadiums->getByIndex(2));
 
-    stadiums->getByIndex(2)->addMatch(new Match(
-            stadiums->getByIndex(2)->getMatches().size() + 1,
-            "30 Jun 2018 21:00",
-            stadiums->getByIndex(2),
-            groups->getTeamByGroupPosition(1, "A"), // 1A
-            groups->getTeamByGroupPosition(2, "B")  // 2B
-    ));
 
-    // quarter final
-    stadiums->getByIndex(2)->addMatch(new Match(
-            stadiums->getByIndex(2)->getMatches().size() + 1,
-            "7 Jul 2018 21:00",
-            stadiums->getByIndex(2),
-            teams->getByIdAndName(51, "W"), // W51
-            teams->getByIdAndName(52, "W")  // W52
-    ));
     
     ////////////////////////////////////////////////
     // STADIUM 4
     ////////////////////////////////////////////////
-    stadiums->getByIndex(3)->addMatch(new Match(
-            stadiums->getByIndex(3)->getMatches().size() + 1,
+    addMatch(new Match(
+            matches->getSize() + 1,
             "15 Jun 2018 17:00",
             stadiums->getByIndex(3),
-            teams->getByIdAndName(3, "A"), // A3
-            teams->getByIdAndName(4, "A")  // A4
-    ));
+            teams->getByName("A3"), // A3
+            teams->getByName("A4")  // A4
+    ), matches, stadiums->getByIndex(3));
 
-    stadiums->getByIndex(3)->addMatch(new Match(
-            stadiums->getByIndex(3)->getMatches().size() + 1,
+    addMatch(new Match(
+            matches->getSize() + 1,
             "21 Jun 2018 17:00",
             stadiums->getByIndex(3),
-            teams->getByIdAndName(1, "C"), // C1
-            teams->getByIdAndName(3, "C")  // C3
-    ));
+            teams->getByName("C1"), // C1
+            teams->getByName("C3")  // C3
+    ), matches, stadiums->getByIndex(3));
 
-    stadiums->getByIndex(3)->addMatch(new Match(
-            stadiums->getByIndex(3)->getMatches().size() + 1,
+    addMatch(new Match(
+            matches->getSize() + 1,
             "24 Jun 2018 20:00",
             stadiums->getByIndex(3),
-            teams->getByIdAndName(4, "H"), // H4
-            teams->getByIdAndName(2, "H")  // H2
-    ));
+            teams->getByName("H4"), // H4
+            teams->getByName("H2")  // H2
+    ), matches, stadiums->getByIndex(3));
     
-    stadiums->getByIndex(3)->addMatch(new Match(
-            stadiums->getByIndex(3)->getMatches().size() + 1,
+    addMatch(new Match(
+            matches->getSize() + 1,
             "27 Jun 2018 19:00",
             stadiums->getByIndex(3),
-            teams->getByIdAndName(2, "F"), // F2
-            teams->getByIdAndName(3, "F")  // F3
-    ));
+            teams->getByName("F2"), // F2
+            teams->getByName("F3")  // F3
+    ), matches, stadiums->getByIndex(3));
 
+    
+    
     ////////////////////////////////////////////////
     // STADIUM 5
     ////////////////////////////////////////////////
-    stadiums->getByIndex(4)->addMatch(new Match(
-            stadiums->getByIndex(4)->getMatches().size() + 1,
+    addMatch(new Match(
+            matches->getSize() + 1,
             "16 Jun 2018 13:00",
             stadiums->getByIndex(4),
-            teams->getByIdAndName(1, "C"), // C1
-            teams->getByIdAndName(2, "C")  // C2
-    ));
+            teams->getByName("C1"), // C1
+            teams->getByName("C2")  // C2
+    ), matches, stadiums->getByIndex(4));
 
-    stadiums->getByIndex(4)->addMatch(new Match(
-            stadiums->getByIndex(4)->getMatches().size() + 1,
+    addMatch(new Match(
+            matches->getSize() + 1,
             "20 Jun 2018 21:00",
             stadiums->getByIndex(4),
-            teams->getByIdAndName(4, "B"), // B4
-            teams->getByIdAndName(2, "B")  // B2
-    ));
+            teams->getByName("B4"), // B4
+            teams->getByName("B2")  // B2
+    ), matches, stadiums->getByIndex(4));
 
-    stadiums->getByIndex(4)->addMatch(new Match(
-            stadiums->getByIndex(4)->getMatches().size() + 1,
+    addMatch(new Match(
+            matches->getSize() + 1,
             "24 Jun 2018 21:00",
             stadiums->getByIndex(4),
-            teams->getByIdAndName(1, "H"), // H1
-            teams->getByIdAndName(3, "H")  // H3
-    ));
+            teams->getByName("H1"), // H1
+            teams->getByName("H3")  // H3
+    ), matches, stadiums->getByIndex(4));
 
-    stadiums->getByIndex(4)->addMatch(new Match(
-            stadiums->getByIndex(4)->getMatches().size() + 1,
+    addMatch(new Match(
+            matches->getSize() + 1,
             "27 Jun 2018 17:00",
             stadiums->getByIndex(4),
-            teams->getByIdAndName(4, "F"), // F4
-            teams->getByIdAndName(1, "F")  // F1
-    ));
+            teams->getByName("F4"), // F4
+            teams->getByName("F1")  // F1
+    ), matches, stadiums->getByIndex(4));
 
-    stadiums->getByIndex(4)->addMatch(new Match(
-            stadiums->getByIndex(4)->getMatches().size() + 1,
-            "30 Jun 2018 17:00",
-            stadiums->getByIndex(4),
-            groups->getTeamByGroupPosition(1, "C"), // 1C
-            groups->getTeamByGroupPosition(2, "D")  // 2D
-    ));
 
-    // quarter final
-    stadiums->getByIndex(4)->addMatch(new Match(
-            stadiums->getByIndex(4)->getMatches().size() + 1,
-            "6 Jul 2018 21:00",
-            stadiums->getByIndex(4),
-            teams->getByIdAndName(53, "W"), // W53
-            teams->getByIdAndName(54, "W")  // W54
-    ));
 
     ////////////////////////////////////////////////
     // STADIUM 6
     ////////////////////////////////////////////////
-    stadiums->getByIndex(5)->addMatch(new Match(
-            stadiums->getByIndex(5)->getMatches().size() + 1,
+    addMatch(new Match(
+            matches->getSize() + 1,
             "18 Jun 2018 15:00",
             stadiums->getByIndex(5),
-            teams->getByIdAndName(3, "F"), // F3
-            teams->getByIdAndName(4, "F")  // F4
-    ));
+            teams->getByName("F3"), // F3
+            teams->getByName("F4")  // F4
+    ), matches, stadiums->getByIndex(5));
 
-    stadiums->getByIndex(5)->addMatch(new Match(
-            stadiums->getByIndex(5)->getMatches().size() + 1,
+    addMatch(new Match(
+            matches->getSize() + 1,
             "21 Jun 2018 21:00",
             stadiums->getByIndex(5),
-            teams->getByIdAndName(1, "D"), // D1
-            teams->getByIdAndName(3, "D")  // D3
-    ));
+            teams->getByName("D1"), // D1
+            teams->getByName("D3")  // D3
+    ), matches, stadiums->getByIndex(5));
 
-    stadiums->getByIndex(5)->addMatch(new Match(
-            stadiums->getByIndex(5)->getMatches().size() + 1,
+    addMatch(new Match(
+            matches->getSize() + 1,
             "24 Jun 2018 15:00",
             stadiums->getByIndex(5),
-            teams->getByIdAndName(4, "G"), // G4
-            teams->getByIdAndName(2, "G")  // G2
-    ));
+            teams->getByName("G4"), // G4
+            teams->getByName("G2")  // G2
+    ), matches, stadiums->getByIndex(5));
 
-    stadiums->getByIndex(5)->addMatch(new Match(
-            stadiums->getByIndex(5)->getMatches().size() + 1,
+    addMatch(new Match(
+            matches->getSize() + 1,
             "27 Jun 2018 21:00",
             stadiums->getByIndex(5),
-            teams->getByIdAndName(2, "E"), // E2
-            teams->getByIdAndName(3, "E")  // E3
-    ));
+            teams->getByName("E2"), // E2
+            teams->getByName("E3")  // E3
+    ), matches, stadiums->getByIndex(5));
 
-    stadiums->getByIndex(5)->addMatch(new Match(
-            stadiums->getByIndex(5)->getMatches().size() + 1,
-            "1 Jul 2018 21:00",
-            stadiums->getByIndex(5),
-            groups->getTeamByGroupPosition(1, "D"), // 1D
-            groups->getTeamByGroupPosition(2, "C")  // 2C
-    ));
-
-    stadiums->getByIndex(5)->addMatch(new Match(
-            stadiums->getByIndex(5)->getMatches().size() + 1,
-            "6 Jul 2018 17:00",
-            stadiums->getByIndex(5),
-            teams->getByIdAndName(49, "W"), // W49
-            teams->getByIdAndName(50, "W")  // W50
-    ));
+    
 
     ////////////////////////////////////////////////
     // STADIUM 7
     ////////////////////////////////////////////////
-    stadiums->getByIndex(6)->addMatch(new Match(
-            stadiums->getByIndex(6)->getMatches().size() + 1,
+    addMatch(new Match(
+            matches->getSize() + 1,
             "17 Jun 2018 21:00",
             stadiums->getByIndex(6),
-            teams->getByIdAndName(1, "E"), // E1
-            teams->getByIdAndName(2, "E")  // E2
-    ));
+            teams->getByName("E1"), // E1
+            teams->getByName("E2")  // E2
+    ), matches, stadiums->getByIndex(6));
 
-    stadiums->getByIndex(6)->addMatch(new Match(
-            stadiums->getByIndex(6)->getMatches().size() + 1,
+    addMatch(new Match(
+            matches->getSize() + 1,
             "10 Jun 2018 18:00",
             stadiums->getByIndex(6),
-            teams->getByIdAndName(4, "A"), // A4
-            teams->getByIdAndName(2, "A")  // A2
-    ));
+            teams->getByName("A4"), // A4
+            teams->getByName("A2")  // A2
+    ), matches, stadiums->getByIndex(6));
 
-    stadiums->getByIndex(6)->addMatch(new Match(
-            stadiums->getByIndex(6)->getMatches().size() + 1,
+    addMatch(new Match(
+            matches->getSize() + 1,
             "23 Jun 2018 21:00",
             stadiums->getByIndex(6),
-            teams->getByIdAndName(4, "F"), // F4
-            teams->getByIdAndName(2, "F")  // F2
-    ));
+            teams->getByName("F4"), // F4
+            teams->getByName("F2")  // F2
+    ), matches, stadiums->getByIndex(6));
 
-    stadiums->getByIndex(6)->addMatch(new Match(
-            stadiums->getByIndex(6)->getMatches().size() + 1,
+    addMatch(new Match(
+            matches->getSize() + 1,
             "26 Jun 2018 21:00",
             stadiums->getByIndex(6),
-            teams->getByIdAndName(2, "D"), // D2
-            teams->getByIdAndName(3, "D")  // D3
-    ));
+            teams->getByName("D2"), // D2
+            teams->getByName("D3")  // D3
+    ), matches, stadiums->getByIndex(6));
 
-    stadiums->getByIndex(6)->addMatch(new Match(
-            stadiums->getByIndex(6)->getMatches().size() + 1,
-            "2 Jul 2018 21:00",
-            stadiums->getByIndex(6),
-            groups->getTeamByGroupPosition(1, "G"), // 1G
-            groups->getTeamByGroupPosition(1, "H")  // 2H
-    ));
+
 
     ////////////////////////////////////////////////
     // STADIUM 8
     ////////////////////////////////////////////////
-    stadiums->getByIndex(7)->addMatch(new Match(
-            stadiums->getByIndex(7)->getMatches().size() + 1,
+    addMatch(new Match(
+            matches->getSize() + 1,
             "17 Jun 2018 16:00",
             stadiums->getByIndex(7),
-            teams->getByIdAndName(3, "E"), // E3
-            teams->getByIdAndName(4, "E")  // E4
-    ));
+            teams->getByName("E3"), // E3
+            teams->getByName("E4")  // E4
+    ), matches, stadiums->getByIndex(7));
 
-    stadiums->getByIndex(7)->addMatch(new Match(
-            stadiums->getByIndex(7)->getMatches().size() + 1,
+    addMatch(new Match(
+            matches->getSize() + 1,
             "20 Jun 2018 19:00",
             stadiums->getByIndex(7),
-            teams->getByIdAndName(4, "C"), // C4
-            teams->getByIdAndName(2, "C")  // C2
-    ));
+            teams->getByName("C4"), // C4
+            teams->getByName("C2")  // C2
+    ), matches, stadiums->getByIndex(7));
 
-    stadiums->getByIndex(7)->addMatch(new Match(
-            stadiums->getByIndex(7)->getMatches().size() + 1,
+    addMatch(new Match(
+            matches->getSize() + 1,
             "25 Jun 2018 18:00",
             stadiums->getByIndex(7),
-            teams->getByIdAndName(4, "A"), // A4
-            teams->getByIdAndName(1, "A")  // Russia A1
-    ));
+            teams->getByName("A4"), // A4
+            teams->getByName("A1")  // Russia A1
+    ), matches, stadiums->getByIndex(7));
 
-    stadiums->getByIndex(7)->addMatch(new Match(
-            stadiums->getByIndex(7)->getMatches().size() + 1,
+    addMatch(new Match(
+            matches->getSize() + 1,
             "28 Jun 2018 18:00",
             stadiums->getByIndex(7),
-            teams->getByIdAndName(2, "H"), // H2
-            teams->getByIdAndName(3, "H")  // H3
-    ));
+            teams->getByName("H2"), // H2
+            teams->getByName("H3")  // H3
+    ), matches, stadiums->getByIndex(7));
 
-    stadiums->getByIndex(7)->addMatch(new Match(
-            stadiums->getByIndex(7)->getMatches().size() + 1,
-            "2 Jul 2018 18:00",
-            stadiums->getByIndex(7),
-            groups->getTeamByGroupPosition(1, "E"), // 1E
-            groups->getTeamByGroupPosition(2, "F")  // 2F
-    ));
-
-    // quarter final
-    stadiums->getByIndex(7)->addMatch(new Match(
-            stadiums->getByIndex(7)->getMatches().size() + 1,
-            "7 Jul 2018 18:00",
-            stadiums->getByIndex(7),
-            teams->getByIdAndName(55, "W"), // W55
-            teams->getByIdAndName(56, "W")  // W56
-    ));
+    
 
     ////////////////////////////////////////////////
     // STADIUM 9
     ////////////////////////////////////////////////
-    stadiums->getByIndex(8)->addMatch(new Match(
-            stadiums->getByIndex(8)->getMatches().size() + 1,
+    addMatch(new Match(
+            matches->getSize() + 1,
             "16 Jun 2018 19:00",
             stadiums->getByIndex(8),
-            teams->getByIdAndName(3, "C"), // C3
-            teams->getByIdAndName(4, "C")  // C4
-    ));
+            teams->getByName("C3"), // C3
+            teams->getByName("C4")  // C4
+    ), matches, stadiums->getByIndex(8));
 
-    stadiums->getByIndex(8)->addMatch(new Match(
-            stadiums->getByIndex(8)->getMatches().size() + 1,
+    addMatch(new Match(
+            matches->getSize() + 1,
             "19 Jun 2018 18:00",
             stadiums->getByIndex(8),
-            teams->getByIdAndName(1, ""), // H3
-            teams->getByIdAndName(1, "")  // H4
-    ));
+            teams->getByName("H3"), // H3
+            teams->getByName("H4")  // H4
+    ), matches, stadiums->getByIndex(8));
 
-    stadiums->getByIndex(8)->addMatch(new Match(
-            stadiums->getByIndex(8)->getMatches().size() + 1,
+    addMatch(new Match(
+            matches->getSize() + 1,
             "25 Jun 2018 21:00",
             stadiums->getByIndex(8),
-            teams->getByIdAndName(4, "B"), // B4
-            teams->getByIdAndName(1, "B")  // B1
-    ));
+            teams->getByName("B4"), // B4
+            teams->getByName("B1")  // B1
+    ), matches, stadiums->getByIndex(8));
 
-    stadiums->getByIndex(8)->addMatch(new Match(
-            stadiums->getByIndex(8)->getMatches().size() + 1,
+    addMatch(new Match(
+            matches->getSize() + 1,
             "28 Jun 2018 21:00",
             stadiums->getByIndex(8),
-            teams->getByIdAndName(2, "G"), // G2
-            teams->getByIdAndName(3, "G")  // G3
-    ));
+            teams->getByName("G2"), // G2
+            teams->getByName("G3")  // G3
+    ), matches, stadiums->getByIndex(8));
+    
+    
     
     ////////////////////////////////////////////////
     // STADIUM 10
     ////////////////////////////////////////////////
-    stadiums->getByIndex(9)->addMatch(new Match(
-            stadiums->getByIndex(9)->getMatches().size() + 1,
+    addMatch(new Match(
+            matches->getSize() + 1,
             "18 Jun 2018 21:00",
             stadiums->getByIndex(9),
-            teams->getByIdAndName(3, "G"), // G3
-            teams->getByIdAndName(4, "G")  // G4
-    ));
+            teams->getByName("G3"), // G3
+            teams->getByName("G4")  // G4
+    ), matches, stadiums->getByIndex(9));
 
-    stadiums->getByIndex(9)->addMatch(new Match(
-            stadiums->getByIndex(9)->getMatches().size() + 1,
+    addMatch(new Match(
+            matches->getSize() + 1,
             "22 Jun 2018 18:00",
             stadiums->getByIndex(9),
-            teams->getByIdAndName(4, "D"), // D4
-            teams->getByIdAndName(2, "D")  // D2
-    ));
+            teams->getByName("D4"), // D4
+            teams->getByName("D2")  // D2
+    ), matches, stadiums->getByIndex(9));
 
-    stadiums->getByIndex(9)->addMatch(new Match(
-            stadiums->getByIndex(9)->getMatches().size() + 1,
+    addMatch(new Match(
+            matches->getSize() + 1,
             "25 Jun 2018 17:00",
             stadiums->getByIndex(9),
-            teams->getByIdAndName(2, "A"), // A2
-            teams->getByIdAndName(3, "A")  // A3
-    ));
+            teams->getByName("A2"), // A2
+            teams->getByName("A3")  // A3
+    ), matches, stadiums->getByIndex(9));
 
-    stadiums->getByIndex(9)->addMatch(new Match(
-            stadiums->getByIndex(9)->getMatches().size() + 1,
+    addMatch(new Match(
+            matches->getSize() + 1,
             "28 Jun 2018 17:00",
             stadiums->getByIndex(9),
-            teams->getByIdAndName(4, "H"), // H4
-            teams->getByIdAndName(1, "H")  // H1
-    ));
+            teams->getByName("H4"), // H4
+            teams->getByName("H1")  // H1
+    ), matches, stadiums->getByIndex(9));
+
+
     
     ////////////////////////////////////////////////
     // STADIUM 11
     ////////////////////////////////////////////////
-    stadiums->getByIndex(10)->addMatch(new Match(
-            stadiums->getByIndex(10)->getMatches().size() + 1,
+    addMatch(new Match(
+            matches->getSize() + 1,
             "16 Jun 2018 16:00",
             stadiums->getByIndex(10),
-            teams->getByIdAndName(1, "D"), // D1
-            teams->getByIdAndName(2, "D")  // D2
-    ));
+            teams->getByName("D1"), // D1
+            teams->getByName("D2")  // D2
+    ), matches, stadiums->getByIndex(10));
 
-    stadiums->getByIndex(10)->addMatch(new Match(
-            stadiums->getByIndex(10)->getMatches().size() + 1,
+    addMatch(new Match(
+            matches->getSize() + 1,
             "19 Jun 2018 15:00",
             stadiums->getByIndex(10),
-            teams->getByIdAndName(1, "H"), // H1
-            teams->getByIdAndName(2, "H")  // H2
-    ));
+            teams->getByName("H1"), // H1
+            teams->getByName("H2")  // H2
+    ), matches, stadiums->getByIndex(10));
 
-    stadiums->getByIndex(10)->addMatch(new Match(
-            stadiums->getByIndex(10)->getMatches().size() + 1,
+    addMatch(new Match(
+            matches->getSize() + 1,
             "23 Jun 2018 15:00",
             stadiums->getByIndex(10),
-            teams->getByIdAndName(1, "B"), // B1
-            teams->getByIdAndName(3, "B")  // B3
-    ));
+            teams->getByName("B1"), // B1
+            teams->getByName("B3")  // B3
+    ), matches, stadiums->getByIndex(10));
 
-    stadiums->getByIndex(10)->addMatch(new Match(
-            stadiums->getByIndex(10)->getMatches().size() + 1,
+    addMatch(new Match(
+            matches->getSize() + 1,
             "26 Jun 2018 17:00",
             stadiums->getByIndex(10),
-            teams->getByIdAndName(4, "C"), // C4
-            teams->getByIdAndName(1, "C")  // C1
-    ));
+            teams->getByName("C4"), // C4
+            teams->getByName("C1")  // C1
+    ), matches, stadiums->getByIndex(10));
 
-    stadiums->getByIndex(10)->addMatch(new Match(
-            stadiums->getByIndex(10)->getMatches().size() + 1,
-            "3 Jul 2018 21:00",
-            stadiums->getByIndex(10),
-            groups->getTeamByGroupPosition(1, "H"), // 1H
-            groups->getTeamByGroupPosition(2, "G")  // 2G
-    ));
+    
     
     ////////////////////////////////////////////////
     // STADIUM 12
     ////////////////////////////////////////////////
-    stadiums->getByIndex(11)->addMatch(new Match(
-            stadiums->getByIndex(11)->getMatches().size() + 1,
+    addMatch(new Match(
+            matches->getSize() + 1,
             "16 Jun 2018 21:00",
             stadiums->getByIndex(11),
-            teams->getByIdAndName(3, "D"), // D3
-            teams->getByIdAndName(4, "D")  // D4
-    ));
+            teams->getByName("D3"), // D3
+            teams->getByName("D4")  // D4
+    ), matches, stadiums->getByIndex(11));
     
-    stadiums->getByIndex(11)->addMatch(new Match(
-            stadiums->getByIndex(11)->getMatches().size() + 1,
+    addMatch(new Match(
+            matches->getSize() + 1,
             "22 Jun 2018 20:00",
             stadiums->getByIndex(11),
-            teams->getByIdAndName(4, "E"), // E4
-            teams->getByIdAndName(2, "E")  // E2
-    ));
+            teams->getByName("E4"), // E4
+            teams->getByName("E2")  // E2
+    ), matches, stadiums->getByIndex(11));
 
-    stadiums->getByIndex(11)->addMatch(new Match(
-            stadiums->getByIndex(11)->getMatches().size() + 1,
+    addMatch(new Match(
+            matches->getSize() + 1,
             "25 Jun 2018 20:00",
             stadiums->getByIndex(11),
-            teams->getByIdAndName(2, "B"), // B2
-            teams->getByIdAndName(3, "B")  // B3
-    ));
+            teams->getByName("B2"), // B2
+            teams->getByName("B3")  // B3
+    ), matches, stadiums->getByIndex(11));
 
-    stadiums->getByIndex(11)->addMatch(new Match(
-            stadiums->getByIndex(11)->getMatches().size() + 1,
+    addMatch(new Match(
+            matches->getSize() + 1,
             "28 Jun 2018 20:00",
             stadiums->getByIndex(11),
-            teams->getByIdAndName(4, "G"), // G4
-            teams->getByIdAndName(1, "G")  // G1
-    ));
-    
+            teams->getByName("G4"), // G4
+            teams->getByName("G1")  // G1
+    ), matches, stadiums->getByIndex(11));
+
 }
 

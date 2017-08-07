@@ -12,8 +12,12 @@
 #ifndef TEAM_FUNCTIONS_H
 #define TEAM_FUNCTIONS_H
 
+#include "TeamsList.h"
+#include "GroupsList.h"
+
 void printTeamMenu();
-void handleTeamMenu();
+void listTeams(TeamsList * teams);
+void handleTeamMenu(TeamsList * teams, GroupsList * groups);
 
 #endif /* TEAM_FUNCTIONS_H */
 

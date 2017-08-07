@@ -16,12 +16,15 @@
 #include "TeamsList.h"
 #include "GroupsList.h"
 #include "StandingsList.h"
+#include "MatchesList.h"
 
 void loadStadiums(StadiumsList * stadiums);
 void loadGroups(GroupsList * groups);
 void loadTeams(TeamsList * teams, GroupsList * groups);
 void loadStandings(StandingsList * standings, TeamsList * teams);
-void loadMatches(StadiumsList * stadiums, TeamsList * teams, GroupsList * groups);
+void loadGroupStandings(GroupsList * groups, StandingsList * standings);
+void addMatch(Match * match, MatchesList * matches, Stadium * stadium);
+void loadMatches(MatchesList * matches, StadiumsList * stadiums, TeamsList * teams, GroupsList * groups);
 
 #endif /* HELPER_FUNCTIONS_H */
 

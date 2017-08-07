@@ -12,8 +12,13 @@
 #ifndef GROUPFUNCTIONS_H
 #define GROUPFUNCTIONS_H
 
+#include "Group.h"
+#include "GroupsList.h"
+
 void printGroupMenu();
-void handleGroupMenu();
+void viewGroup(Group * group);
+void listGroups(GroupsList * groups);
+void handleGroupMenu(GroupsList * groups);
 
 #endif /* GROUPFUNCTIONS_H */
 

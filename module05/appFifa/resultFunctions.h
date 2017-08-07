@@ -12,8 +12,10 @@
 #ifndef RESULTFUNCTIONS_H
 #define RESULTFUNCTIONS_H
 
+#include "MatchesList.h"
+
 void printResultMenu();
-void handleResultMenu();
+void handleResultMenu(MatchesList * matches, StandingsList * standings);
 
 #endif /* RESULTFUNCTIONS_H */
 

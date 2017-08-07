@@ -12,8 +12,15 @@
 #ifndef SCHEDULEFUNCTIONS_H
 #define SCHEDULEFUNCTIONS_H
 
+#include "Stadium.h"
+#include "StadiumsList.h"
+#include "MatchesList.h"
+
 void printScheduleMenu();
-void handleScheduleMenu();
+void listMatches(MatchesList * matches);
+void listMatchesByStadium(StadiumsList * stadiums);
+void handleScheduleMenu(MatchesList * matches, StadiumsList * stadiums);
+void listMatchesInStadium(Stadium * stadium);
 
 #endif /* SCHEDULEFUNCTIONS_H */
 

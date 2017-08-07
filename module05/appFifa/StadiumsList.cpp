@@ -38,8 +38,8 @@ int StadiumsList::getSize()
 
 Stadium * StadiumsList::getByIndex(int index)
 {
-    if (index > stadiums.size() - 1) {
-        throw "Invalid index";
+    if (index < 0 || index > stadiums.size() - 1) {
+        throw "StadiumsList: Invalid index";
     }
 
     return stadiums[index];

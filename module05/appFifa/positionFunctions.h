@@ -12,8 +12,12 @@
 #ifndef POSITIONFUNCTIONS_H
 #define POSITIONFUNCTIONS_H
 
+#include "functions.h"
+#include "GroupsList.h"
+#include "StandingsList.h"
+
 void printPositionMenu();
-void handlePositionMenu();
+void handlePositionMenu(StandingsList * standings, GroupsList * groups);
 
 #endif /* POSITIONFUNCTIONS_H */
 

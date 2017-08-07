@@ -31,6 +31,12 @@ public:
     int getGoalsDiff();
     int getPoints();
 
+    void addWon();
+    void addDraw();
+    void addLost();
+    void addGoalsFor(int a);
+    void addGoalsAgainst(int a);
+    
 private:
     int id;
     Team * team;

@@ -28,6 +28,9 @@ public:
     void addStanding(Standing * standing);
     int getSize();
     Standing * getByIndex(int index);
+    Standing * getByTeamName(string name);
+    vector<Standing *> getStandings();
+    void setStandings(vector<Standing *> standingsIn);
 
 private:
     vector<Standing *> standings;

@@ -35,9 +35,37 @@ int StandingsList::getSize()
 
 Standing * StandingsList::getByIndex(int index)
 {
-    if (index > standings.size() - 1) {
-        throw "Invalid index";
+    if (index < 0 || index > standings.size() - 1) {
+        throw "StandingsList: Invalid index";
     }
 
     return standings[index];
+}
+
+
+Standing * StandingsList::getByTeamName(string name) {
+    bool found = false;
+    int i=0;
+
+    while (!found && i<standings.size()) {
+        if (standings[i]->getTeam()->getName() == name) {
+            found = true;
+        } else {
+            i++;
+        }
+    }
+    
+    if (found) {
+        return standings[i];
+    }
+
+    return NULL;
+}
+
+vector<Standing *> StandingsList::getStandings() {
+    return standings;
+}
+
+void StandingsList::setStandings(vector<Standing *> standingsIn) {
+    standings = standingsIn;
 }

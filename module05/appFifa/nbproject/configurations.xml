@@ -7,6 +7,7 @@
       <itemPath>Group.h</itemPath>
       <itemPath>GroupsList.h</itemPath>
       <itemPath>Match.h</itemPath>
+      <itemPath>MatchesList.h</itemPath>
       <itemPath>Result.h</itemPath>
       <itemPath>Stadium.h</itemPath>
       <itemPath>StadiumsList.h</itemPath>
@@ -32,6 +33,7 @@
       <itemPath>Group.cpp</itemPath>
       <itemPath>GroupsList.cpp</itemPath>
       <itemPath>Match.cpp</itemPath>
+      <itemPath>MatchesList.cpp</itemPath>
       <itemPath>Result.cpp</itemPath>
       <itemPath>Stadium.cpp</itemPath>
       <itemPath>StadiumsList.cpp</itemPath>
@@ -84,6 +86,10 @@
       <item path="Match.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Match.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="MatchesList.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="MatchesList.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Result.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -176,6 +182,10 @@
       <item path="Match.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Match.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="MatchesList.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="MatchesList.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Result.cpp" ex="false" tool="1" flavor2="0">
       </item>

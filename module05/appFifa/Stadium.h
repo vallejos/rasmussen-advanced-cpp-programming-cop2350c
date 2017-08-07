@@ -13,10 +13,12 @@
 #define STADIUM_H
 
 class Match; // forward declaration
+class MatchesList; // forward declaration
 
 #include <string>
 #include <vector>
 #include "Match.h"
+#include "MatchesList.h"
 
 using namespace std;
 
@@ -31,14 +33,14 @@ public:
     string getLocation();
     int getCapacity();
     void addMatch(Match *match);
-    vector<Match *> getMatches();
+    MatchesList * getMatches();
     
 private:
     int id;
     string name;
     string location;
     int capacity;
-    vector<Match *> matchList;
+    MatchesList * matches;
 
 };
 

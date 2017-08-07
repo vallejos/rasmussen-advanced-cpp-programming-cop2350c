@@ -79,3 +79,35 @@ int Standing::getPoints()
 {
     return points;
 }
+
+void Standing::addWon()
+{
+    won++;
+    points += 3;
+    played++;
+}
+
+void Standing::addDraw()
+{
+    draw++;
+    points++;
+    played++;
+}
+
+void Standing::addLost()
+{
+    lost++;
+    played++;
+}
+
+void Standing::addGoalsFor(int a)
+{
+    goalsFor += a;
+    goalsDiff += a;
+}
+
+void Standing::addGoalsAgainst(int a)
+{
+    goalsAgainst += a;
+    goalsDiff -= a;
+}

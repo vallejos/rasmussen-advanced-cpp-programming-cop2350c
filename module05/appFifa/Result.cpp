@@ -15,7 +15,7 @@
 
 using namespace std;
 
-Result::Result(Team *team1In, Team *team2In):
+Result::Result(Team * team1In, Team * team2In):
 team1(team1In), team2(team2In)
 {
     t190min = 0;
@@ -42,20 +42,20 @@ int Result::getTeam2Result()
     return t290min + t2Extended + t2Penalties;
 }
 
-void Result::set90Min(int team1, int team2)
+void Result::set90Min(int t1, int t2)
 {
-    t190min = team1;
-    t290min = team2;
+    t190min = t1;
+    t290min = t2;
 }
 
-void Result::setExtended(int team1, int team2)
+void Result::setExtended(int t1, int t2)
 {
-    t1Extended = team1;
-    t2Extended = team2;
+    t1Extended = t1;
+    t2Extended = t2;
 }
 
-void Result::setPenalties(int team1, int team2)
+void Result::setPenalties(int t1, int t2)
 {
-    t1Penalties = team1;
-    t2Penalties = team2;
+    t1Penalties = t1;
+    t2Penalties = t2;
 }

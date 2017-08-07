@@ -19,20 +19,20 @@ using namespace std;
 
 class Result {
 public:
-    Result(Team *team1In, Team *team2In);
+    Result(Team * team1In, Team * team2In);
     Result(const Result& orig);
     virtual ~Result();
 
     int getTeam1Result();
     int getTeam2Result();
-    void set90Min(int team1, int team2);
-    void setExtended(int team1, int team2);
-    void setPenalties(int team1, int team2);
+    void set90Min(int t1, int t2);
+    void setExtended(int t1, int t2);
+    void setPenalties(int t1, int t2);
     
 private:
     int id;
-    Team *team1;
-    Team *team2;
+    Team * team1;
+    Team * team2;
     int t190min;
     int t1Extended;
     int t1Penalties;

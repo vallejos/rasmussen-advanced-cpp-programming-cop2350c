@@ -11,25 +11,22 @@
 
 #include <string>
 #include <vector>
-#include "Team.h"
 #include "Group.h"
+
 
 using namespace std;
 
-Group::Group(int idIn, string nameIn):
-id(idIn), name(nameIn)
+Group::Group(string nameIn):
+name(nameIn)
 {
+    teams = new TeamsList();
+    standings = new StandingsList();
 }
 
 Group::Group(const Group& orig) {
 }
 
 Group::~Group() {
-}
-
-int Group::getId()
-{
-    return id;
 }
 
 string Group::getName()
@@ -39,10 +36,11 @@ string Group::getName()
 
 void Group::addTeam(Team *team)
 {
-    teams.push_back(team);
+    teams->addTeam(team);
+    standings->addStanding(new Standing(standings->getSize() + 1, team));
 }
 
-vector<Team *> Group::getTeams()
+TeamsList * Group::getTeams()
 {
     return teams;
 }
@@ -59,4 +57,19 @@ Team * Group::getTeamByPosition(int position)
 StandingsList * Group::getStandings()
 {
     return standings;
+}
+
+void Group::addStanding(Standing * standing)
+{
+    standings->addStanding(standing);
+}
+
+void Group::setTeams(TeamsList * teamsIn)
+{
+    teams = teamsIn;
+}
+
+void Group::setStandings(StandingsList * standingsIn)
+{
+    standings = standingsIn;
 }

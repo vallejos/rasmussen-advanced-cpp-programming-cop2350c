@@ -10,27 +10,31 @@
  */
 
 #include <iostream>
+#include "functions.h"
 #include "positionFunctions.h"
+#include "GroupsList.h"
+#include "StandingsList.h"
 
 using namespace std;
 
 /**
  * Prints the position menu
  */
-void printPositionMenu()
-{
+void printPositionMenu() {
     cout << endl << "---------------------------" << endl;
     cout << "\t View Positions" << endl;
     cout << "---------------------------" << endl;
-    cout << "  1 - Manage Teams" << endl;
+    cout << "  1 - Global Standings" << endl;
+    cout << "  2 - Group Standings" << endl;
     cout << "---------------------------" << endl;
     cout << "  0 - Return" << endl;
     cout << endl << "Select an option: ";
 }
 
-void handlePositionMenu() {
+void handlePositionMenu(StandingsList * standings, GroupsList * groups) {
     int choice;
     bool exitAndReturn = false;
+    string group;
     
     while (!exitAndReturn) {
         printPositionMenu();
@@ -38,7 +42,17 @@ void handlePositionMenu() {
         
         switch (choice) {
             case 1:
-                // do something
+                printHeader("Current Global Standings");
+                printStandings(standings);
+                break;
+
+            case 2:
+                cout << endl << "Enter a Group: ";
+                cin >> group;
+
+                printHeader("Standings for Group " + group);
+                
+                printStandings(groups->getByName(group)->getStandings());
                 break;
 
             case 0:

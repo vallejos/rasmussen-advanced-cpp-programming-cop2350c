@@ -27,7 +27,10 @@ public:
     void addTeam(Team *team);
     int getSize();
     Team * getByIndex(int index);
-    Team * getByIdAndName(int id, string name);
+    Team * getByName(string name);
+
+//    Team * getByIdAndName(int id, string name);
+//    Team * getByGroupPosition(int id, string group);
 
 private:
     vector<Team *> teams;

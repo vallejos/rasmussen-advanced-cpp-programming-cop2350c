@@ -35,8 +35,8 @@ int GroupsList::getSize()
 
 Group * GroupsList::getByIndex(int index)
 {
-    if (index > groups.size() - 1) {
-        throw "Invalid index";
+    if (index < 0 || index > groups.size() - 1) {
+        throw "GroupsList: Invalid index";
     }
 
     return groups[index];
