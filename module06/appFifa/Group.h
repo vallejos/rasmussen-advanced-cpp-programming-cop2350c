@@ -4,6 +4,7 @@
  * FileName: Group.h
  * Purpose: FIFA 2018 World Cup App.
  *          Course project for COP2350C Advanced C++ Programming course at Rasmussen College.
+ * Description: Group class
  */
 
 #ifndef GROUP_H

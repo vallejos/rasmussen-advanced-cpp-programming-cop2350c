@@ -4,6 +4,7 @@
  * FileName: GroupsList.h
  * Purpose: FIFA 2018 World Cup App.
  *          Course project for COP2350C Advanced C++ Programming course at Rasmussen College.
+ * Description: GroupsList class
  */
 
 #ifndef GROUPSLIST_H
